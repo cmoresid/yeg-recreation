@@ -41,7 +41,3 @@ createMinimalEvent title date link = Event
   , _whereToPurchaseTickets = Nothing
   , _rawDescription = Nothing
   }
-
-parseEventDate :: String -> Maybe Day
-parseEventDate dt = parseTimeM True defaultTimeLocale "%Y/%m/%d" dtStripped
-  where dtStripped = take 10 dt
