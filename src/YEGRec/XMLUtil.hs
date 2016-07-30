@@ -1,10 +1,11 @@
-{-# LANGUAGE Arrows #-}
-{-# LANGUAGE NoMonomorphismRestriction #-}
-
 module YEGRec.XMLUtil where
 
-import Text.XML.HXT.Core
+import Text.XML.Light
 
-atTag tag = deep (isElem >>> hasName tag)
-
-text = getChildren >>> getText
+getTextContent :: Maybe Element -> Maybe String
+getTextContent elm =
+  case elm of
+    Nothing -> Nothing
+    Just item ->
+      let [Text title_content] = elContent item
+      in Just (cdData title_content)

@@ -1,6 +1,7 @@
 module YEGRec.Types where
 
 import Data.Time
+import YEGRec.Util
 
 data Event = Event
   { _title :: String
@@ -22,11 +23,11 @@ data Event = Event
   }
   deriving (Show, Eq)
 
-createMinimalEvent :: String -> Maybe Day -> String -> Event
+createMinimalEvent :: Maybe String -> Maybe Day -> Maybe String -> Event
 createMinimalEvent title date link = Event
-  { _title = title
+  { _title = extract title
   , _eventDate = date
-  , _link = link
+  , _link = extract link
   , _venue = Nothing
   , _additionalInformation = Nothing
   , _cityTown = Nothing
