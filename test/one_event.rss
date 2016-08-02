@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:x-microsoft="http://schemas.microsoft.com/x-microsoft" xmlns:x-trumba="http://schemas.trumba.com/rss/x-trumba" version="2.0">
+	<channel>
+		<title>City of Edmonton</title>
+		<link>http://www.edmonton.ca/attractions_events/schedule_festivals_events/events-calendar.aspx</link>
+		<description />
+		<language>en-us</language>
+		<lastBuildDate>28 Jul 2016 14:21:36 GMT</lastBuildDate>
+		<image>
+			<title>Calendar Feed powered by Trumba</title>
+			<url>http://www.trumba.com/images/trumba_logo_sm.gif</url>
+			<link>http://www.edmonton.ca/attractions_events/schedule_festivals_events/events-calendar.aspx</link>
+		</image>
+		<item>
+			<title>Sean Caulfield: The Flood</title>
+			<description>ART GALLERY OF ALBERTA&lt;br /&gt;2 Sir Winston Churchill Square&lt;br /&gt;Edmonton AB T5J 2C1 &lt;br/&gt;Ongoing through Sunday, August 14, 2016, 5pm &lt;br/&gt;&lt;br/&gt;&lt;img src="http://www.trumba.com/i/DgBzLSlWFXj27mZrW%2AuuZd0Y.jpg" width="100" height="49" /&gt;&lt;br/&gt;&lt;br/&gt;The 2016 Manning Hall Commission features a new site-specific installation by Edmonton artist Sean Caulfield entitled The Flood. The imagery presented in the work follows Caulfield&amp;#8217;s ongoing explorations into the impact of technological advancements on our environment. &lt;br/&gt;&lt;br/&gt;&lt;b&gt;City / Town&lt;/b&gt;:&amp;nbsp;Edmonton &lt;br/&gt;&lt;b&gt;Event Venue&lt;/b&gt;:&amp;nbsp;Art Gallery of Alberta &lt;br/&gt;&lt;b&gt;Neighbourhood&lt;/b&gt;:&amp;nbsp;Downtown &lt;br/&gt;&lt;b&gt;Short Description&lt;/b&gt;:&amp;nbsp;2016 Manning Hall Commission &lt;br/&gt;&lt;b&gt;Event Category&lt;/b&gt;:&amp;nbsp;Exhibits &lt;br/&gt;&lt;b&gt;Cost&lt;/b&gt;:&amp;nbsp;FREE &lt;br/&gt;&lt;b&gt;More info&lt;/b&gt;:&amp;nbsp;&lt;a href="http://www.youraga.ca/exhibit/sean-caulfield-the-flood" target="_blank" title="http://www.youraga.ca/exhibit/sean-caulfield-the-flood"&gt;www.youraga.ca&amp;#8230;&lt;/a&gt; &lt;br/&gt;&lt;br/&gt;</description>
+			<link>http://www.edmonton.ca/attractions_events/schedule_festivals_events/events-calendar.aspx?trumbaEmbed=view%3devent%26eventid%3d117969785</link>
+			<x-trumba:ealink>https://eventactions.com/eventactions/city-of-edmonton-calendar#/actions/gsdv36bn0c8nxrswcjk0yt29mw</x-trumba:ealink>
+			<category>2016/02/06 (Sat)</category>
+			<guid isPermaLink="false">http://uid.trumba.com/event/117969785</guid>
+			<x-trumba:weblink>http://www.youraga.ca/exhibit/sean-caulfield-the-flood</x-trumba:weblink>
+		</item>
+	</channel>
+</rss>

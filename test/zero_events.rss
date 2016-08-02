@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:x-microsoft="http://schemas.microsoft.com/x-microsoft" xmlns:x-trumba="http://schemas.trumba.com/rss/x-trumba" version="2.0">
+	<channel>
+		<title>City of Edmonton</title>
+		<link>http://www.edmonton.ca/attractions_events/schedule_festivals_events/events-calendar.aspx</link>
+		<description />
+		<language>en-us</language>
+		<lastBuildDate>28 Jul 2016 14:21:36 GMT</lastBuildDate>
+		<image>
+			<title>Calendar Feed powered by Trumba</title>
+			<url>http://www.trumba.com/images/trumba_logo_sm.gif</url>
+			<link>http://www.edmonton.ca/attractions_events/schedule_festivals_events/events-calendar.aspx</link>
+		</image>
+	</channel>
+</rss>
