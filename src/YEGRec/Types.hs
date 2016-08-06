@@ -3,6 +3,8 @@ module YEGRec.Types where
 import Data.Time
 import YEGRec.Util
 
+type RegexMatch = ((String, (String, String)), [(Int, String)])
+
 data Event = Event
   { _title :: String
   , _eventDate :: Day

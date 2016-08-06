@@ -14,8 +14,6 @@ import YEGRec.Types
 import YEGRec.XMLUtil
 import YEGRec.Util
 
-type RegexMatch = ((String, (String, String)), [(Int, String)])
-
 getEventFeed :: String -> IO String
 getEventFeed url = simpleHTTP (getRequest url) >>= getResponseBody
 
@@ -47,8 +45,8 @@ extractTags = foldl (\acc x -> acc ++ extractTag' x) []
   where extractTag' ((tag, (_, _)), [(_, _)]) = [tag]
 
 createEvent :: String -> String -> Day -> String -> Event
-createEvent title desc date link =
-  let descriptionMap = parseDescription desc
+createEvent title rawDesc date link =
+  let descriptionMap = parseDescription rawDesc
       getField field = M.lookup field descriptionMap
   in Event
           { _title = title
@@ -66,14 +64,14 @@ createEvent title desc date link =
           , _publicEngagementCategory = getField "Public Engagement Category"
           , _shortDescription = getField "Short Description"
           , _whereToPurchaseTickets = getField "Where to purchase tickets"
-          , _rawDescription = desc
+          , _rawDescription = rawDesc
           }
 
 parseEvent :: Element -> Maybe Event
 parseEvent item = do
   title <- getTextContent $ findChild (unqual "title") item
-  description <- getTextContent $ findChild (unqual "description") item
+  rawDesc <- getTextContent $ findChild (unqual "description") item
   date <- getTextContent (findChild (unqual "category") item) >>= parseEventDate
   link <- getTextContent $ findChild (unqual "link") item
 
-  return $ createEvent title description date link
+  return $ createEvent title rawDesc date link
