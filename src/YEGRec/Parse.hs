@@ -1,11 +1,20 @@
 module YEGRec.Parse where
 
-import Text.XML.Light
-import Network.HTTP
+import qualified Data.Map.Strict as M
 import Data.Time
+import Data.List.Split
+
+import Text.RegexPR
+import Text.XML.Light
+import Text.HTML.TagSoup
+
+import Network.HTTP
 
 import YEGRec.Types
 import YEGRec.XMLUtil
+import YEGRec.Util
+
+type RegexMatch = ((String, (String, String)), [(Int, String)])
 
 getEventFeed :: String -> IO String
 getEventFeed url = simpleHTTP (getRequest url) >>= getResponseBody
@@ -16,17 +25,55 @@ parseEventDate dt = parseTimeM True defaultTimeLocale "%Y/%m/%d" dtStripped
 
 parseEventFeedXml :: String -> [Maybe Event]
 parseEventFeedXml feed =
-  case parseXMLDoc feed of
-    Nothing -> []
-    Just doc -> map parseEvent $ findElements (unqual "item") doc
+    case parseXMLDoc feed of
+      Nothing -> []
+      Just doc -> map parseEvent $ findElements (unqual "item") doc
+
+parseDescription :: String -> M.Map String String
+parseDescription = M.fromList . parseDescComps . extractDescComps
+
+parseDescComps :: [String] -> [(String, String)]
+parseDescComps comps = map toTuple lpairs
+  where parsedComps = map (innerText . parseTags) comps
+        lpairs = map (splitOn ":\160" . strip) parsedComps
+
+extractDescComps :: String -> [String]
+extractDescComps desc =  extractTags components
+  where components = gmatchRegexPR p desc
+        p = "<b>(.*?)<br/>"
+
+extractTags :: [RegexMatch] -> [String]
+extractTags = foldl (\acc x -> acc ++ extractTag' x) []
+  where extractTag' ((tag, (_, _)), [(_, _)]) = [tag]
+
+createEvent :: String -> String -> Day -> String -> Event
+createEvent title desc date link =
+  let descriptionMap = parseDescription desc
+      getField field = M.lookup field descriptionMap
+  in Event
+          { _title = title
+          , _eventDate = date
+          , _link = link
+          , _venue = getField "Event Venue"
+          , _additionalInformation = getField "Additional Information"
+          , _cityTown = getField "City / Town"
+          , _contactEmail = getField "Contact Email"
+          , _contactName = getField "Contact Name"
+          , _cost = getField "Cost"
+          , _eventCategory = getField "Event Category"
+          , _neighbourhood = getField "Neighbourhood"
+          , _projectName = getField "Project Name"
+          , _publicEngagementCategory = getField "Public Engagement Category"
+          , _shortDescription = getField "Short Description"
+          , _whereToPurchaseTickets = getField "Where to purchase tickets"
+          , _rawDescription = desc
+          }
 
 parseEvent :: Element -> Maybe Event
-parseEvent item =
-  let title = getTextContent $ findChild (unqual "title") item
-      description = getTextContent $ findChild (unqual "description") item
-      category = getTextContent $ findChild (unqual "category") item
-      link = getTextContent $ findChild (unqual "link") item
-      date = case category of
-        Nothing -> Nothing
-        Just dt -> parseEventDate dt
-  in Just (createMinimalEvent title date link)
+parseEvent item = do
+  title <- getTextContent $ findChild (unqual "title") item
+  description <- getTextContent $ findChild (unqual "description") item
+  date <- getTextContent (findChild (unqual "category") item) >>= parseEventDate
+  link <- getTextContent $ findChild (unqual "link") item
+
+  return $ createEvent title description date link

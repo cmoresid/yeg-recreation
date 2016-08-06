@@ -13,24 +13,30 @@ main = hspec $ do
     it "returns Nothing for invalid date string" $
       parseEventDate "" `shouldBe` Nothing
 
-  describe "YEGRec.Parser.parseEventFeedXml" $
+  describe "YEGRec.Parser.parseEventFeedXml" $ do
+    it "parses zero events successfully" $ do
+      e <- readFile "test/zero_events.rss"
+      parseEventFeedXml e `shouldBe` []
+    it "parses all events successfully" $ do
+      e <- readFile "test/full_feed.rss"
+      length (parseEventFeedXml e) `shouldBe` 200
     it "parses one event successfully" $ do
       e <- readFile "test/one_event.rss"
       parseEventFeedXml e `shouldBe` [Just
                                         Event {_title = "Sean Caulfield: The Flood"
-                                                 , _eventDate = Just $ fromGregorian 2016 2 6
-                                                 , _link = "http://www.edmonton.ca/attractions_events/schedule_festivals_events/events-calendar.aspx?trumbaEmbed=view%3devent%26eventid%3d117969785"
-                                                 , _venue = Nothing
-                                                 , _additionalInformation = Nothing
-                                                 , _cityTown = Nothing
-                                                 , _contactEmail = Nothing
-                                                 , _contactName = Nothing
-                                                 , _cost = Nothing
-                                                 , _eventCategory = Nothing
-                                                 , _neighbourhood = Nothing
-                                                 , _projectName = Nothing
-                                                 , _publicEngagementCategory = Nothing
-                                                 , _shortDescription = Nothing
-                                                 , _whereToPurchaseTickets = Nothing
-                                                 , _rawDescription = Nothing
-                                                 }]
+                                              , _eventDate = fromGregorian 2016 2 6
+                                              , _link = "http://www.edmonton.ca/attractions_events/schedule_festivals_events/events-calendar.aspx?trumbaEmbed=view%3devent%26eventid%3d117969785"
+                                              , _venue = Just "Art Gallery of Alberta"
+                                              , _additionalInformation = Nothing
+                                              , _cityTown = Just "Edmonton"
+                                              , _contactEmail = Nothing
+                                              , _contactName = Nothing
+                                              , _cost = Just "FREE"
+                                              , _eventCategory = Just "Exhibits"
+                                              , _neighbourhood = Just "Downtown"
+                                              , _projectName = Nothing
+                                              , _publicEngagementCategory = Nothing
+                                              , _shortDescription = Just "2016 Manning Hall Commission"
+                                              , _whereToPurchaseTickets = Nothing
+                                              , _rawDescription = "ART GALLERY OF ALBERTA<br />2 Sir Winston Churchill Square<br />Edmonton AB T5J 2C1 <br/>Ongoing through Sunday, August 14, 2016, 5pm <br/><br/><img src=\"http://www.trumba.com/i/DgBzLSlWFXj27mZrW%2AuuZd0Y.jpg\" width=\"100\" height=\"49\" /><br/><br/>The 2016 Manning Hall Commission features a new site-specific installation by Edmonton artist Sean Caulfield entitled The Flood. The imagery presented in the work follows Caulfield&#8217;s ongoing explorations into the impact of technological advancements on our environment. <br/><br/><b>City / Town</b>:&nbsp;Edmonton <br/><b>Event Venue</b>:&nbsp;Art Gallery of Alberta <br/><b>Neighbourhood</b>:&nbsp;Downtown <br/><b>Short Description</b>:&nbsp;2016 Manning Hall Commission <br/><b>Event Category</b>:&nbsp;Exhibits <br/><b>Cost</b>:&nbsp;FREE <br/><b>More info</b>:&nbsp;<a href=\"http://www.youraga.ca/exhibit/sean-caulfield-the-flood\" target=\"_blank\" title=\"http://www.youraga.ca/exhibit/sean-caulfield-the-flood\">www.youraga.ca&#8230;</a> <br/><br/>"
+                                              }]

@@ -19,6 +19,11 @@ library
                      , HTTP
                      , time
                      , xml
+                     , regexpr
+                     , tagsoup
+                     , split
+                     , text
+                     , containers
   exposed-modules:     YEGRec.Types
                      , YEGRec.Parse
                      , YEGRec.Util
