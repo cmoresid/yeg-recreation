@@ -24,6 +24,8 @@ library
                      , split
                      , text
                      , containers
+                     , HDBC
+                     , HDBC-postgresql
   exposed-modules:     YEGRec.Types
                      , YEGRec.Parse
                      , YEGRec.Util
