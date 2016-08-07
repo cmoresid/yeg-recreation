@@ -49,22 +49,22 @@ createEvent title rawDesc date link =
   let descriptionMap = parseDescription rawDesc
       getField field = M.lookup field descriptionMap
   in Event
-          { _title = title
-          , _eventDate = date
-          , _link = link
-          , _venue = getField "Event Venue"
-          , _additionalInformation = getField "Additional Information"
-          , _cityTown = getField "City / Town"
-          , _contactEmail = getField "Contact Email"
-          , _contactName = getField "Contact Name"
-          , _cost = getField "Cost"
-          , _eventCategory = getField "Event Category"
-          , _neighbourhood = getField "Neighbourhood"
-          , _projectName = getField "Project Name"
-          , _publicEngagementCategory = getField "Public Engagement Category"
-          , _shortDescription = getField "Short Description"
-          , _whereToPurchaseTickets = getField "Where to purchase tickets"
-          , _rawDescription = rawDesc
+          { eventTitle = title
+          , eventDate = date
+          , eventLink = link
+          , eventVenue = getField "Event Venue"
+          , eventAdditionalInformation = getField "Additional Information"
+          , eventCityTown = getField "City / Town"
+          , eventContactEmail = getField "Contact Email"
+          , eventContactName = getField "Contact Name"
+          , eventCost = getField "Cost"
+          , eventCategory = getField "Event Category"
+          , eventNeighbourhood = getField "Neighbourhood"
+          , eventProjectName = getField "Project Name"
+          , eventPublicEngagementCategory = getField "Public Engagement Category"
+          , eventShortDescription = getField "Short Description"
+          , eventWhereToPurchaseTickets = getField "Where to purchase tickets"
+          , eventRawDescription = rawDesc
           }
 
 parseEvent :: Element -> Maybe Event

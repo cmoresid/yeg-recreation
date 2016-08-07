@@ -1,26 +1,43 @@
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GADTs #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE QuasiQuotes #-}
+{-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE TypeFamilies #-}
+
 module YEGRec.Types where
 
+-------------------------------------------------------------------------------
 import Data.Time
-import YEGRec.Util
 
+import Database.Persist.TH (mkMigrate, mkPersist, persistLowerCase, share,
+  sqlSettings)
+
+import YEGRec.Util
+-------------------------------------------------------------------------------
+
+-- |Type synonym to represent a global regex match on string
 type RegexMatch = ((String, (String, String)), [(Int, String)])
 
-data Event = Event
-  { _title :: String
-  , _eventDate :: Day
-  , _link :: String
-  , _venue :: Maybe String
-  , _additionalInformation :: Maybe String
-  , _cityTown :: Maybe String
-  , _contactEmail :: Maybe String
-  , _contactName :: Maybe String
-  , _cost :: Maybe String
-  , _eventCategory :: Maybe String
-  , _neighbourhood :: Maybe String
-  , _projectName :: Maybe String
-  , _publicEngagementCategory :: Maybe String
-  , _shortDescription :: Maybe String
-  , _whereToPurchaseTickets :: Maybe String
-  , _rawDescription :: String
-  }
-  deriving (Show, Eq)
+-- |Creates the Event record type / entity.
+share [mkMigrate "migrateAll", mkPersist sqlSettings] [persistLowerCase|
+  Event json
+    title String
+    date Day
+    link String
+    venue String Maybe
+    additionalInformation String Maybe
+    cityTown String Maybe
+    contactEmail String Maybe
+    contactName String Maybe
+    cost String Maybe
+    category String Maybe
+    neighbourhood String Maybe
+    projectName String Maybe
+    publicEngagementCategory String Maybe
+    shortDescription String Maybe
+    whereToPurchaseTickets String Maybe
+    rawDescription String
+    deriving Show Eq
+|]

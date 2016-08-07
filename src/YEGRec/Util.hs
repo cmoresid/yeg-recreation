@@ -14,4 +14,4 @@ strip :: String -> String
 strip = T.unpack . T.strip . T.pack
 
 toTuple :: [a] -> (a, a)
-toTuple [a, b] = (a, b) 
+toTuple [a, b] = (a, b)
