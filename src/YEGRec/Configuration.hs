@@ -4,10 +4,8 @@
 module YEGRec.Configuration where
 
 -------------------------------------------------------------------------------
-import Control.Concurrent.STM
 import Control.Monad.IO.Class (MonadIO, liftIO)
-import Control.Monad.Reader (MonadReader, ReaderT, asks, ask, runReaderT)
-import Control.Monad.Trans.Class (MonadTrans, lift)
+import Control.Monad.Reader (MonadReader, ReaderT)
 
 import Data.Default (def)
 import Data.Text.Lazy (Text)
@@ -54,6 +52,7 @@ getPort = do
             Just s -> Just $ read s
   return p
 
+-- |Augment WARP settings with our own settings.
 getSettings :: Environment -> IO Settings
 getSettings e = do
   let s = defaultSettings
@@ -67,6 +66,7 @@ getSettings e = do
               Just p -> setPort p s'
   return s''
 
+-- |Update Scotty's settings.
 getOptions :: Environment -> IO Options
 getOptions e = do
   s <- getSettings e

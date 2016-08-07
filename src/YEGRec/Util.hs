@@ -3,15 +3,14 @@ module YEGRec.Util where
 import Network.HTTP
 import qualified Data.Text as T
 
-extract :: Maybe String -> String
-extract (Just m) = m
-extract Nothing = "Unknown"
+-- |Downloads the latest RSS event feed.
+getEventFeed :: String -> IO String
+getEventFeed feedUrl = simpleHTTP (getRequest feedUrl) >>= getResponseBody
 
-downloadFile :: String -> IO String
-downloadFile url = simpleHTTP (getRequest url) >>= getResponseBody
-
+-- |Trims the whitespace from the front and back of string.
 strip :: String -> String
 strip = T.unpack . T.strip . T.pack
 
+-- |Converts a list of length 2 to a 2-tuple.
 toTuple :: [a] -> (a, a)
 toTuple [a, b] = (a, b)

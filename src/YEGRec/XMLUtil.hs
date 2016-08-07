@@ -1,7 +1,10 @@
 module YEGRec.XMLUtil where
 
+-------------------------------------------------------------------------------
 import Text.XML.Light
+-------------------------------------------------------------------------------
 
+-- |Retrieve the text from an XML element.
 getTextContent :: Maybe Element -> Maybe String
 getTextContent elm =
   case elm of

@@ -64,3 +64,8 @@ runDB :: (MonadTrans t, MonadIO (t ConfigM)) =>
 runDB q = do
   p <- lift (asks pool)
   liftIO $ DB.runSqlPool q p
+
+-- |Performs any SQL migrations, if necessary.
+migrateSchema :: Config -> IO ()
+migrateSchema c =
+  liftIO $ flip DB.runSqlPersistMPool (pool c) $ DB.runMigration migrateAll

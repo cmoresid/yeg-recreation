@@ -1,5 +1,6 @@
 module YEGRec.Parse where
 
+-------------------------------------------------------------------------------
 import qualified Data.Map.Strict as M
 import Data.Time
 import Data.List.Split
@@ -9,13 +10,11 @@ import Text.XML.Light
 import Text.HTML.TagSoup
 
 import Network.HTTP
-
+-------------------------------------------------------------------------------
 import YEGRec.Types
 import YEGRec.XMLUtil
 import YEGRec.Util
-
-getEventFeed :: String -> IO String
-getEventFeed url = simpleHTTP (getRequest url) >>= getResponseBody
+-------------------------------------------------------------------------------
 
 parseEventDate :: String -> Maybe Day
 parseEventDate dt = parseTimeM True defaultTimeLocale "%Y/%m/%d" dtStripped

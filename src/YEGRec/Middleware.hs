@@ -14,7 +14,7 @@ import Network.Wai (Middleware)
 import Network.Wai.Middleware.RequestLogger (logStdout, logStdoutDev)
 
 import Web.Scotty.Trans (status, showError, json)
-
+-------------------------------------------------------------------------------
 import YEGRec.Configuration
 import YEGRec.Types
 import YEGRec.DB
@@ -35,11 +35,13 @@ defaultH e x = do
             Test -> object["error" .= showError x]
   json o
 
+-- |HTTP 404 handler.
 notFoundA :: Action
 notFoundA = do
   status notFound404
   json Null
 
+-- |Retrieves all events from the database.
 getEventsA :: Action
 getEventsA = do
   ts <- runDB (DB.selectList [] [])

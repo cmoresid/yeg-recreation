@@ -17,14 +17,13 @@ library
   hs-source-dirs:      src
   build-depends:       base >= 4.7 && < 5
                      , HTTP
-                     , http-types ==0.8.*
+                     , http-types
                      , time
                      , xml
                      , regexpr
                      , tagsoup
                      , split
                      , text
-                     , stm
                      , containers
                      , data-default
                      , persistent
@@ -35,10 +34,10 @@ library
                      , aeson
                      , mtl
                      , monad-logger
-                     , wai ==3.0.*
-                     , wai-extra ==3.0.*
-                     , warp ==3.*
-                     , scotty ==0.9.*
+                     , wai
+                     , wai-extra
+                     , warp
+                     , scotty
   exposed-modules:     YEGRec.Types
                      , YEGRec.Parse
                      , YEGRec.Util
@@ -55,15 +54,7 @@ executable yeg-recreation-exe
   build-depends:       base
                      , yeg-recreation
                      , mtl
-                     , stm
-                     , data-default-class
-                     , transformers
-                     , persistent
-                     , persistent-postgresql
-                     , wai ==3.0.*
-                     , wai-extra ==3.0.*
-                     , warp ==3.*
-                     , scotty ==0.9.*
+                     , scotty
   default-language:    Haskell2010
 
 test-suite yeg-recreation-test

@@ -15,7 +15,7 @@
 # resolver:
 #  name: custom-snapshot
 #  location: "./custom-snapshot.yaml"
-resolver: lts-5.8
+resolver: lts-6.9
 
 # User packages to be built.
 # Various formats can be used as shown in the example below.
@@ -43,10 +43,6 @@ extra-deps:
 - regexpr-0.5.4
 - mtlparse-0.1.4.0
 - heroku-0.1.2.3
-- scotty-0.9.1
-- wai-3.0.3.0
-- http-types-0.8.6
-- warp-3.0.13.1
 
 # Override default flag values for local packages and extra-deps
 flags: {}
