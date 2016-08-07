@@ -1,3 +1,5 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Main where
 
 import Control.Concurrent.STM
@@ -33,6 +35,8 @@ application = do
   e <- lift (asks env)
   middleware $ loggingM e
   defaultHandler $ defaultH e
+  get "/api/events" getEventsA
+  notFound notFoundA
 
 getConfig :: IO Config
 getConfig = do
