@@ -32,6 +32,7 @@ runApplication c = do
       app = application c
   scottyOptsT o r app
 
+-- |Configure Scotty application
 application :: Config -> ScottyT Error ConfigM ()
 application c = do
   middleware $ loggingM (env c)
