@@ -12,6 +12,7 @@ import Web.Scotty.Trans (ActionT, Options, ScottyT, defaultHandler, delete,
 -------------------------------------------------------------------------------
 import YEGRec.Configuration
 import YEGRec.DB
+import YEGRec.Migrate
 import YEGRec.Middleware
 import YEGRec.Types
 -------------------------------------------------------------------------------
@@ -28,15 +29,17 @@ runApplication :: Config -> IO ()
 runApplication c = do
   o <- getOptions (env c)
   let r m = runReaderT (runConfigM m) c
-  scottyOptsT o r application
-  where application :: ScottyT Error ConfigM ()
-        application = do
-          middleware $ loggingM (env c)
-          defaultHandler $ defaultH (env c)
-          -- Add event routes
-          get "/api/events" getEventsA
-          -- Add not found handler
-          notFound notFoundA
+      app = application c
+  scottyOptsT o r app
+
+application :: Config -> ScottyT Error ConfigM ()
+application c = do
+  middleware $ loggingM (env c)
+  defaultHandler $ defaultH (env c)
+  -- Add event routes
+  get "/api/events" getEventsA
+  -- Add not found handler
+  notFound notFoundA
 
 -- |Beam me up Scotty!
 main :: IO ()
